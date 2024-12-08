@@ -27,7 +27,9 @@ const RegisterForm = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-    axios.post("/api/register", data).then(() => {
+    axios
+      .post("/api/register", data)
+      .then(() => {
         toast.success("Account Created");
         signIn("credentials", {
           email: data.email,
@@ -39,7 +41,9 @@ const RegisterForm = () => {
             router.refresh();
             toast.success("Logged in");
           }
-          if (callback?.error) toast.success(callback.error);
+          if (callback?.error) {
+            toast.error(callback.error);
+          }
         });
       })
       .catch(() => toast.error("somthin went wrong"))
