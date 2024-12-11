@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Heading from "../components/Heading";
 import Input from "../components/inputs/Input";
 import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
@@ -12,8 +12,12 @@ import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
 import { redirect } from "next/dist/server/api-utils";
 import { useRouter } from "next/navigation";
+import { SafeUser } from "@/types";
+interface RegisterFormProps {
+  currentUser: SafeUser | null;
+}
 
-const RegisterForm = () => {
+const RegisterForm: React.FC<RegisterFormProps> = ({ currentUser }) => {
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -24,6 +28,13 @@ const RegisterForm = () => {
   });
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (currentUser) {
+      router.push("/");
+      router.refresh();
+    }
+  }, []);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
@@ -51,15 +62,20 @@ const RegisterForm = () => {
         setIsLoading(false);
       });
   };
+  if (currentUser) {
+    return <p className="text-center">Logged in Redirecting...</p>;
+  }
 
   return (
     <>
       <Heading title="Sing up To TDF-SHOP-STOR" />
       <Button
         outline
-        lable="Sing up with Google "
+        label="Continue with Google "
         icon={AiOutlineGoogle}
-        OnClick={() => {}}
+        OnClick={() => {
+          signIn("google");
+        }}
       />
       <hr className="bg-slate-300 w-full h-px" />
       <Input
@@ -88,7 +104,7 @@ const RegisterForm = () => {
         type="password"
       />
       <Button
-        lable={isLoading ? "Loading" : "Sing up"}
+        label={isLoading ? "Loading" : "Sing up"}
         OnClick={handleSubmit(onSubmit)}
       />
       <p className="text-sm">

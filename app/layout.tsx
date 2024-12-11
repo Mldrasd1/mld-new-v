@@ -5,7 +5,6 @@ import Navbar from "./components/nav/navbar";
 import Footer from "./components/footer/footer";
 import CartProvider from "@/providers/CartProvider";
 import { Toaster } from "react-hot-toast";
-import { getCurrentUser } from "@/actions/getCurrentUser";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,8 +27,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const currentUser = await getCurrentUser();
-
   return (
     <html lang="en">
       <body
