@@ -71,7 +71,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ currentUser }) => {
       <Heading title="Sing up To TDF-SHOP-STOR" />
       <Button
         outline
-        label="Continue with Google "
+        lable="Continue with Google "
         icon={AiOutlineGoogle}
         OnClick={() => {
           signIn("google");
@@ -104,7 +104,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ currentUser }) => {
         type="password"
       />
       <Button
-        label={isLoading ? "Loading" : "Sing up"}
+        lable={isLoading ? "Loading" : "Sing up"}
         OnClick={handleSubmit(onSubmit)}
       />
       <p className="text-sm">

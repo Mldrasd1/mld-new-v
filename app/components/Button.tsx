@@ -3,7 +3,7 @@
 import { IconType } from "react-icons";
 
 interface ButtonProps {
-  label: string;
+  lable: string;
   disabled?: boolean;
   outline?: boolean;
   small?: boolean;
@@ -12,7 +12,7 @@ interface ButtonProps {
   OnClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 const Button: React.FC<ButtonProps> = ({
-  label,
+  lable,
   disabled,
   outline,
   small,
@@ -34,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({
          `}
     >
       {Icon && <Icon size={24} />}
-      {label}
+      {lable}
     </button>
   );
 };
