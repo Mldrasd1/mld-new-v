@@ -7,7 +7,6 @@ import Link from "next/link";
 import MenuItem from "./MenuItem";
 import { signOut } from "next-auth/react";
 import BackDrop from "./BackDrop";
-import { getCurrentUser } from "@/actions/getCurrentUser";
 import { SafeUser } from "@/types";
 
 interface UserMenuProps {
@@ -48,7 +47,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 <Link href="/admin">
                   <MenuItem onClick={toggleOpen}>Admin Dashboard</MenuItem>
                 </Link>
-                <hr/>
+                <hr />
                 <MenuItem
                   onClick={() => {
                     toggleOpen();
